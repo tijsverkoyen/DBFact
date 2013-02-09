@@ -1,0 +1,23 @@
+{
+	"name": "tijsverkoyen/dbfact",
+	"type": "library",
+	"description": "PHP DBFact is a (wrapper)class to communicate with DBFact.",
+	"homepage": "https://github.com/tijsverkoyen/DBFact",
+	"license": "BSD",
+	"authors": [
+		{
+			"name": "Tijs Verkoyen",
+			"email": "php-dbfact@verkoyen.eu",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0",
+		"ext-curl": "*",
+		"ext-zip": "*"
+	},
+	"target-dir": "TijsVerkoyen/DBFact",
+	"autoload": {
+		"psr-0": {"TijsVerkoyen\\DBFact": ""}
+	}
+}
