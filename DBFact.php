@@ -153,7 +153,7 @@ class DBFact extends BaseSoapClient
 
         // store content
         $filename = $timestamp = 'dbfact_' . uniqid();
-        $file = tempnam(sys_get_temp_dir(), $filename);
+        $filename = tempnam(sys_get_temp_dir(), $filename);
         $handle = fopen($filename, 'a');
         fwrite($handle, base64_decode($response->crs_answer->c_zipfile));
         fclose($handle);
