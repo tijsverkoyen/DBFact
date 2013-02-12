@@ -63,6 +63,13 @@ class DBFact extends BaseSoapClient
         }
     }
 
+    /**
+     * Convert the XML into an object
+     *
+     * @param  string $xml
+     * @param  string $className
+     * @return object
+     */
     public static function convertToObject($xml, $className)
     {
         $response = new $className;
@@ -74,7 +81,7 @@ class DBFact extends BaseSoapClient
     /**
      * Decode a response
      *
-     * @param $response
+     * @param  mixed  $response
      * @return object
      */
     private function decodeResponse($response)
@@ -128,7 +135,7 @@ class DBFact extends BaseSoapClient
     /**
      * Decode a response that was zipped
      *
-     * @param $response
+     * @param  string $response
      * @return object
      */
     private function decodeZipResponse($response)
@@ -261,9 +268,9 @@ class DBFact extends BaseSoapClient
     }
 
     /**
-     * Get the useragent that will be used.
+     * Get the user-agent that will be used.
      * Our version will be prepended to yours.
-     * It will look like: "PHP Recreatex/<version> <your-user-agent>"
+     * It will look like: "PHP DBFact/<version> <your-user-agent>"
      *
      * @return string
      */
@@ -274,7 +281,8 @@ class DBFact extends BaseSoapClient
 
     /**
      * Set the user-agent for you application
-     * It will be appended to ours, the result will look like: "PHP Recreatex/<version> <your-user-agent>"
+     * It will be appended to ours, the result will look like:
+     * "PHP DBFact/<version> <your-user-agent>"
      *
      * @param string $userAgent Your user-agent, it should look like <app-name>/<app-version>.
      */
@@ -292,7 +300,6 @@ class DBFact extends BaseSoapClient
     }
 
     /**
-     * @param
      * @return string
      */
     public function showFilePath()
@@ -301,7 +308,6 @@ class DBFact extends BaseSoapClient
     }
 
     /**
-     * @param
      * @return string
      */
     public function showVersion()
@@ -310,8 +316,7 @@ class DBFact extends BaseSoapClient
     }
 
     /**
-     * @param
-     * @return string
+     * @return Message
      */
     public function showAllVersions()
     {
