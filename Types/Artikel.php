@@ -8,6 +8,15 @@ namespace TijsVerkoyen\DBFact\Types;
  */
 class Artikel extends BaseObject
 {
+    public $ArtCode, $ArtNummer, $VolgNummer, $Groep, $Soort, $Omschrijving,
+        $Omschrijving2, $Omschrijving3, $Omschrijving4, $Specificaties, $DetailSpecificaties,
+        $MerkId, $Merk, $StukNummer, $Opmerking, $Status, $StockControle, $VeldC1, $VeldC2,
+        $VeldC3, $VeldC4, $VeldC5, $VeldC6, $Website, $TopSeller, $VeldL3, $VeldL4, $VeldL5,
+        $BOKlant, $BOLeverancier, $Kleur, $Maat, $WebLink, $TypeArtikel, $Referentie, $Fabrikant,
+		$LotnummerArtikel, $ExtraTekstTaal1, $ExtraTekstTaal2, $ExtraTekstTaal3, $ExtraTekstTaal4,
+		$VeldM2, $VeldM3, $KortingsGroep;
+
+
     /**
      * @var float
      */
@@ -87,6 +96,11 @@ class Artikel extends BaseObject
      * @var float
      */
     public $NettoGewichtInKg;
+
+	/**
+	 * @var float
+	 */
+	public $VerpakkingsGewicht;
 
     /**
      * @var int
