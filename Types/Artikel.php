@@ -183,6 +183,9 @@ class Artikel extends BaseObject
      * @var array
      */
     protected $typeMap = array(
+	    'array' => array(
+		    'Images'
+	    ),
         'float' => array(
             'Stock', 'MinimumStock', 'NominaleStock',
             'VeldN1', 'VeldN2', 'VeldN3', 'VeldN4', 'VeldN5',
@@ -191,7 +194,7 @@ class Artikel extends BaseObject
             'MinimumAfname',
             'Inhoud',
             'M3',
-            'BrutoGewichtInKg', 'NettoGewichtInKg',
+            'VerpakkingsGewicht', 'BrutoGewichtInKg', 'NettoGewichtInKg',
         ),
         'int' => array(
             'VerpakkingsLengte', 'VerpakkingsBreedte', 'VerpakkingsHoogte',
@@ -202,7 +205,7 @@ class Artikel extends BaseObject
             'VeldD1', 'VeldD2', 'VeldD3', 'VeldD4', 'VeldD5',
         ),
         'Custom' => array(
-            'Prijzen', 'Kosten'
+            'Prijzen', 'Kosten', //'Images', //'Appendices', //'Barcodes',
         ),
     );
 }
