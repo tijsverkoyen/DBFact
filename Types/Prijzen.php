@@ -14,12 +14,12 @@ class Prijzen extends BaseObject
     public $PromoActief;
 
     /**
-     * @var string
+     * @var \DateTime
      */
     public $PromoPrijsVan;
 
     /**
-     * @var string
+     * @var \DateTime
      */
     public $PromoPrijsTot;
 
