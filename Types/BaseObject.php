@@ -28,21 +28,20 @@ class BaseObject
             $name = (string) $property->getName();
             $value = $property;
 
-	        if (
-		        isset($this->typeMap['array']) &&
-		        in_array($name, $this->typeMap['array'])
-	        ) {
-		        $items = array();
-		        foreach($property as $item)
-		        {
-			        $itemName = (string) $item->getName();
-			        $items[] = DBFact::convertToObject(
-				        $item, 'TijsVerkoyen\\DBFact\\Types\\' . $itemName
-			        );
-		        }
-		        $value = $items;
-
-	        } elseif (
+            if (
+                isset($this->typeMap['array']) &&
+                in_array($name, $this->typeMap['array'])
+            ) {
+                $items = array();
+                foreach ($property as $item) {
+                    $itemName = (string) $item->getName();
+                    $items[] = DBFact::convertToObject(
+                        $item,
+                        'TijsVerkoyen\\DBFact\\Types\\' . $itemName
+                    );
+                }
+                $value = $items;
+            } elseif (
                isset($this->typeMap['float']) &&
                in_array($name, $this->typeMap['float'])
             ) {
@@ -76,20 +75,23 @@ class BaseObject
                 isset($this->typeMap['Custom']) &&
                 in_array($name, $this->typeMap['Custom'])
             ) {
-                $value = DBFact::convertToObject($property, 'TijsVerkoyen\\DBFact\\Types\\' . $name);
+                $value = DBFact::convertToObject(
+                    $property,
+                    'TijsVerkoyen\\DBFact\\Types\\' . $name
+                );
             } elseif(
                 isset($this->typeMap['Collection']) &&
                 in_array($name, $this->typeMap['Collection'])
             ) {
-		        $items = array();
-		        foreach($xml->{$name} as $item)
-		        {
-			        $itemName = (string) $item->getName();
-			        $items[] = DBFact::convertToObject(
-				        $item, 'TijsVerkoyen\\DBFact\\Types\\' . $itemName
-			        );
-		        }
-		        $value = $items;
+                $items = array();
+                foreach ($xml->{$name} as $item) {
+                    $itemName = (string) $item->getName();
+                    $items[] = DBFact::convertToObject(
+                        $item,
+                        'TijsVerkoyen\\DBFact\\Types\\' . $itemName
+                    );
+                }
+                $value = $items;
             } else {
                 $value = (string) $value;
                 if ($value == '') {

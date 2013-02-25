@@ -18,6 +18,7 @@ try {
 //    $response = $dbFact->showVersion();
 //    $response = $dbFact->login(LOGIN, PASSWORD);
 //    $response = $dbFact->artExport($sessionId, EXTRA_PASSWORD, '');
+//    $response = $dbFact->getArtImage($sessionId, array(119, 120));
 } catch (Exception $e) {
     var_dump($e);
 }

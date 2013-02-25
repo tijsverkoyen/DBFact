@@ -183,9 +183,9 @@ class Artikel extends BaseObject
      * @var array
      */
     protected $typeMap = array(
-	    'array' => array(
-		    'Images'
-	    ),
+        'array' => array(
+            'Images'
+        ),
         'float' => array(
             'Stock', 'MinimumStock', 'NominaleStock',
             'VeldN1', 'VeldN2', 'VeldN3', 'VeldN4', 'VeldN5',

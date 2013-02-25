@@ -355,4 +355,26 @@ class DBFact extends BaseSoapClient
 
         return $this->decodeResponse($response);
     }
+
+    /**
+     * @param  string $acSessionId
+     * @param  array  $acXmlMetImageIds
+     * @return string
+     */
+    public function getArtImage($acSessionId, array $imageIds)
+    {
+        $acXmlMetImageIds = '<?xml version="1.0" encoding="utf-8"?>'."\n";
+        $acXmlMetImageIds .= '<Message>'."\n";
+
+        foreach ($imageIds as $id) {
+            $acXmlMetImageIds .= '<ImageId>'. $id . '</ImageId>'."\n";
+        }
+
+        $acXmlMetImageIds .= '</Message>';
+
+        $response = $this->getSoapClient()->GetArtImage($acSessionId, $acXmlMetImageIds);
+        $response = $this->decodeZipResponse($response);
+
+        return DBFact::convertToObject($response, 'TijsVerkoyen\DBFact\Types\Images');
+    }
 }
