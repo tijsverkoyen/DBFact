@@ -28,7 +28,21 @@ class BaseObject
             $name = (string) $property->getName();
             $value = $property;
 
-            if (
+	        if (
+		        isset($this->typeMap['array']) &&
+		        in_array($name, $this->typeMap['array'])
+	        ) {
+		        $items = array();
+		        foreach($property as $item)
+		        {
+			        $itemName = (string) $item->getName();
+			        $items[] = DBFact::convertToObject(
+				        $item, 'TijsVerkoyen\\DBFact\\Types\\' . $itemName
+			        );
+		        }
+		        $value = $items;
+
+	        } elseif (
                isset($this->typeMap['float']) &&
                in_array($name, $this->typeMap['float'])
             ) {
