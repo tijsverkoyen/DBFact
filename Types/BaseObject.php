@@ -77,6 +77,19 @@ class BaseObject
                 in_array($name, $this->typeMap['Custom'])
             ) {
                 $value = DBFact::convertToObject($property, 'TijsVerkoyen\\DBFact\\Types\\' . $name);
+            } elseif(
+                isset($this->typeMap['Collection']) &&
+                in_array($name, $this->typeMap['Collection'])
+            ) {
+		        $items = array();
+		        foreach($xml->{$name} as $item)
+		        {
+			        $itemName = (string) $item->getName();
+			        $items[] = DBFact::convertToObject(
+				        $item, 'TijsVerkoyen\\DBFact\\Types\\' . $itemName
+			        );
+		        }
+		        $value = $items;
             } else {
                 $value = (string) $value;
                 if ($value == '') {
