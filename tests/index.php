@@ -23,6 +23,7 @@ try {
 //    $response = $dbFact->getAppendices($sessionId, array(10583, 10574));
 //    $response = $dbFact->getAppendicesGezipt($sessionId, null, array('P:\MARKETING\PRODUCTINFO\HARMAN KARDON\TECHNISCHE FICHES\SPECIFICATION SHEET - GO + PLAY II (DUTCH).PDF'));
 //    $response = $dbFact->getAppendicesGezipt($sessionId, array('10573'));
+//    $response = $dbFact->keepAlive($sessionId);
 } catch (Exception $e) {
     var_dump($e);
 }

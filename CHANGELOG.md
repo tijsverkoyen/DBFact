@@ -4,3 +4,4 @@
 * Implemented getArtImage
 * Implemented getMultipleArtInfo
 * Implemented getAppendices
+* Implemented keepAlive

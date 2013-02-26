@@ -169,4 +169,15 @@ class DBFactTest extends PHPUnit_Framework_TestCase
             $this->isArticle($item);
         }
     }
+
+    /**
+     * Tests DBFact->keepAlive()
+     */
+    public function testKeepAlive()
+    {
+        $response = $this->dbFact->login(LOGIN, PASSWORD);
+        $response = $this->dbFact->keepAlive($response->SessionId);
+        $this->assertInstanceOf('TijsVerkoyen\DBFact\Types\Message', $response);
+        $this->assertEquals('Ok', $response->KeepAlive);
+    }
 }
