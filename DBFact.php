@@ -400,12 +400,12 @@ class DBFact extends BaseSoapClient
         return $this->decodeResponse($response);
     }
 
-    /**
-     * @param  string                               $acSessionId
-     * @param  string                               $acXmlMetAppendixIds
-     * @return TijsVerkoyen\DBFact\Types\Appendices
-     */
-    public function getAppendices($acSessionId, array $appendixIds)
+	/**
+	 * @param $acSessionId
+	 * @param array $appendixIds
+	 * @return TijsVerkoyen\DBFact\Types\Appendices
+	 */
+	public function getAppendices($acSessionId, array $appendixIds)
     {
         $acXmlMetAppendixIds = '<?xml version="1.0" encoding="utf-8"?>'."\n";
         $acXmlMetAppendixIds .= '<Message>'."\n";
@@ -419,6 +419,47 @@ class DBFact extends BaseSoapClient
         $response = $this->getSoapClient()->GetAppendices($acSessionId, $acXmlMetAppendixIds);
 
         return $this->decodeResponse($response);
-        return DBFact::convertToObject($response, 'TijsVerkoyen\DBFact\Types\Appendices');
+    }
+
+	/**
+	 * @param $acSessionId
+	 * @param array[optional] $appendixIds
+	 * @param array[optional] $fullpaths
+	 * @return TijsVerkoyen\DBFact\Types\Appendices
+	 */
+	public function getAppendicesGezipt($acSessionId, array $appendixIds = null, array $fullPaths = null)
+    {
+	    if(!empty($appendixIds) && !empty($fullpaths)) {
+		    throw new Exception('You can\'t specify ids and paths.');
+	    }
+
+	    if(!empty($appendixIds))
+	    {
+	        $acXmlMetAppendixIds = '<?xml version="1.0" encoding="utf-8"?>'."\n";
+	        $acXmlMetAppendixIds .= '<Message>'."\n";
+
+	        foreach ($appendixIds as $id) {
+	            $acXmlMetAppendixIds .= '<Appendix>'. $id . '</Appendix>'."\n";
+	        }
+
+	        $acXmlMetAppendixIds .= '</Message>';
+	    }
+
+	    if(!empty($fullPaths))
+	    {
+		    $acXmlMetAppendixIds = '<?xml version="1.0" encoding="utf-8"?>'."\n";
+		    $acXmlMetAppendixIds .= '<Message>'."\n";
+
+		    foreach ($fullPaths as $path) {
+			    $acXmlMetAppendixIds .= '<FullPath><![CDATA['. $path . ']]></FullPath>'."\n";
+		    }
+
+		    $acXmlMetAppendixIds .= '</Message>';
+	    }
+
+        $response = $this->getSoapClient()->GetAppendicesGezipt($acSessionId, $acXmlMetAppendixIds);
+	    $response = $this->decodeZipResponse($response);
+
+	    return DBFact::convertToObject($response, 'TijsVerkoyen\DBFact\Types\Appendices');
     }
 }
