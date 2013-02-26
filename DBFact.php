@@ -15,7 +15,7 @@ use TijsVerkoyen\DBFact\Types\Message;
  */
 class DBFact extends BaseSoapClient
 {
-    const DEBUG = true;
+    const DEBUG = false;
     const VERSION = '1.0.0';
 
     /**
@@ -357,8 +357,8 @@ class DBFact extends BaseSoapClient
     }
 
     /**
-     * @param  string $acSessionId
-     * @param  array  $acXmlMetImageIds
+     * @param  string                           $acSessionId
+     * @param  array                            $acXmlMetImageIds
      * @return TijsVerkoyen\DBFact\Types\Images
      */
     public function getArtImage($acSessionId, array $imageIds)
@@ -398,5 +398,27 @@ class DBFact extends BaseSoapClient
         $response = $this->getSoapClient()->GetMultipleArtInfo($acSessionId, $acXmlMetArtCodes, $anRelnum);
 
         return $this->decodeResponse($response);
+    }
+
+    /**
+     * @param  string                               $acSessionId
+     * @param  string                               $acXmlMetAppendixIds
+     * @return TijsVerkoyen\DBFact\Types\Appendices
+     */
+    public function getAppendices($acSessionId, array $appendixIds)
+    {
+        $acXmlMetAppendixIds = '<?xml version="1.0" encoding="utf-8"?>'."\n";
+        $acXmlMetAppendixIds .= '<Message>'."\n";
+
+        foreach ($appendixIds as $id) {
+            $acXmlMetAppendixIds .= '<Appendix>'. $id . '</Appendix>'."\n";
+        }
+
+        $acXmlMetAppendixIds .= '</Message>';
+
+        $response = $this->getSoapClient()->GetAppendices($acSessionId, $acXmlMetAppendixIds);
+
+        return $this->decodeResponse($response);
+        return DBFact::convertToObject($response, 'TijsVerkoyen\DBFact\Types\Appendices');
     }
 }

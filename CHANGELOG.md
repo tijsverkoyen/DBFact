@@ -3,3 +3,4 @@
 * Bugfix: use the correct path for the file
 * Implemented getArtImage
 * Implemented getMultipleArtInfo
+* Implemented getAppendices

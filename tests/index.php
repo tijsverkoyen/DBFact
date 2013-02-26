@@ -20,6 +20,7 @@ try {
 //    $response = $dbFact->artExport($sessionId, EXTRA_PASSWORD, '');
 //    $response = $dbFact->getArtImage($sessionId, array(119, 120));
 //    $response = $dbFact->getMultipleArtInfo($sessionId, array(2, 3), 1);
+//    $response = $dbFact->getAppendices($sessionId, array(10583, 10574));
 } catch (Exception $e) {
     var_dump($e);
 }
