@@ -395,7 +395,7 @@ class Artikel extends BaseObject
      */
     protected $typeMap = array(
         'array' => array(
-            'Images'
+            'Images', 'Appendices', 'Barcodes'
         ),
         'float' => array(
             'Stock', 'MinimumStock', 'NominaleStock',
@@ -416,7 +416,7 @@ class Artikel extends BaseObject
             'VeldD1', 'VeldD2', 'VeldD3', 'VeldD4', 'VeldD5',
         ),
         'Custom' => array(
-            'Prijzen', 'Kosten', //'Images', //'Appendices', //'Barcodes',
+            'Prijzen', 'Kosten'
         ),
     );
 }
