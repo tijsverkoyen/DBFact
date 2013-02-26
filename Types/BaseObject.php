@@ -45,7 +45,7 @@ class BaseObject
                isset($this->typeMap['float']) &&
                in_array($name, $this->typeMap['float'])
             ) {
-                $value = (float) $value;
+                $value = (float) str_replace(',', '.', $value);
             } elseif(
                 isset($this->typeMap['int']) &&
                 in_array($name, $this->typeMap['int'])
