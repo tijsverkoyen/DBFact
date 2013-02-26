@@ -377,4 +377,26 @@ class DBFact extends BaseSoapClient
 
         return DBFact::convertToObject($response, 'TijsVerkoyen\DBFact\Types\Images');
     }
+
+    /**
+     * @param $acSessionId
+     * @param  array                             $artNummers
+     * @param  null                              $anRelnum
+     * @return TijsVerkoyen\DBFact\Types\Message
+     */
+    public function getMultipleArtInfo($acSessionId, array $artNummers = null, $anRelnum = null)
+    {
+        $acXmlMetArtCodes = '<?xml version="1.0" encoding="utf-8"?>'."\n";
+        $acXmlMetArtCodes .= '<Message>'."\n";
+
+        foreach ($artNummers as $id) {
+            $acXmlMetArtCodes .= '<ArtCode>'. $id . '</ArtCode>'."\n";
+        }
+
+        $acXmlMetArtCodes .= '</Message>';
+
+        $response = $this->getSoapClient()->GetMultipleArtInfo($acSessionId, $acXmlMetArtCodes, $anRelnum);
+
+        return $this->decodeResponse($response);
+    }
 }

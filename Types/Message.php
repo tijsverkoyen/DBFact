@@ -108,19 +108,19 @@ class Message extends BaseObject
      */
     public $AccountId;
 
-	/**
-	 * @var array
-	 */
-	public $Article;
+    /**
+     * @var array
+     */
+    public $Article;
 
-	/**
-	 * Map the properties to a given type
-	 *
-	 * @var array
-	 */
-	protected $typeMap = array(
-		'Collection' => array(
-			'Article',
-		),
-	);
+    /**
+     * Map the properties to a given type
+     *
+     * @var array
+     */
+    protected $typeMap = array(
+        'Collection' => array(
+            'Article',
+        ),
+    );
 }

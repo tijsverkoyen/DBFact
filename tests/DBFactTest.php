@@ -37,6 +37,16 @@ class DBFactTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Check if an item is an Article
+     *
+     * @param $item
+     */
+    private function isArticle($item)
+    {
+        $this->assertInstanceOf('TijsVerkoyen\DBFact\Types\Article', $item);
+    }
+
+    /**
      * Check if an item is an Artikel
      *
      * @param $item
@@ -144,6 +154,19 @@ class DBFactTest extends PHPUnit_Framework_TestCase
         $this->assertInstanceOf('TijsVerkoyen\DBFact\Types\Images', $response);
         foreach ($response->Image as $item) {
             $this->isImage($item);
+        }
+    }
+
+    /**
+     * Tests DBFact->getMultipleArtInfo()
+     */
+    public function testGetMultipleArtInfo()
+    {
+        $response = $this->dbFact->login(LOGIN, PASSWORD);
+        $response = $this->dbFact->getMultipleArtInfo($response->SessionId, array(2, 3), 1);
+        $this->assertInstanceOf('TijsVerkoyen\DBFact\Types\Message', $response);
+        foreach ($response->Article as $item) {
+            $this->isArticle($item);
         }
     }
 }

@@ -8,7 +8,7 @@ use \TijsVerkoyen\DBFact\DBFact;
 
 // create instance
 $dbFact = new DBFact(WSDL);
-$response = $dbFact->Login(LOGIN, PASSWORD);
+$response = $dbFact->login(LOGIN, PASSWORD);
 $sessionId = $response->SessionId;
 
 try {
@@ -19,6 +19,7 @@ try {
 //    $response = $dbFact->login(LOGIN, PASSWORD);
 //    $response = $dbFact->artExport($sessionId, EXTRA_PASSWORD, '');
 //    $response = $dbFact->getArtImage($sessionId, array(119, 120));
+//    $response = $dbFact->getMultipleArtInfo($sessionId, array(2, 3), 1);
 } catch (Exception $e) {
     var_dump($e);
 }
