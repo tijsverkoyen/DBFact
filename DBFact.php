@@ -359,7 +359,7 @@ class DBFact extends BaseSoapClient
     /**
      * @param  string $acSessionId
      * @param  array  $acXmlMetImageIds
-     * @return string
+     * @return TijsVerkoyen\DBFact\Types\Images
      */
     public function getArtImage($acSessionId, array $imageIds)
     {
