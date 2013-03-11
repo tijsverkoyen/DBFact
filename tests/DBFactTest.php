@@ -181,18 +181,33 @@ class DBFactTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Ok', $response->KeepAlive);
     }
 
-	/**
-	 * Tests DBFact->receiveFile()
-	 */
-	public function testReceiveFile()
-	{
-		$files = array(
-			array(
-				'File' => file_get_contents('./order.xml'),
-				'FileName' => 'order.xml',
-			),
-		);
-		$response = $this->dbFact->receiveFile($files);
-		$this->assertTrue($response);
-	}
+    /**
+     * Tests DBFact->receiveFile()
+     */
+    public function testReceiveFile()
+    {
+        $files = array(
+            array(
+                'File' => file_get_contents('./order.xml'),
+                'FileName' => 'order.xml',
+            ),
+        );
+        $response = $this->dbFact->receiveFile($files);
+        $this->assertTrue($response);
+    }
+
+    /**
+     * Tests DBFact->receiveFileWithComment()
+     */
+    public function testReceiveFileWithComment()
+    {
+        $files = array(
+            array(
+                'File' => file_get_contents('./order.xml'),
+                'FileName' => 'order.xml',
+            ),
+        );
+        $response = $this->dbFact->receiveFileWithComment($files);
+        $this->assertEquals('OK', $response->Success);
+    }
 }

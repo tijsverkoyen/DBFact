@@ -494,4 +494,29 @@ class DBFact extends BaseSoapClient
 
         return $this->getSoapClient()->ReceiveFile($acXMLWithFiles);
     }
+
+    /**
+     * @param  array                             $files
+     * @return TijsVerkoyen\DBFact\Types\Message
+     */
+    public function receiveFileWithComment(array $files)
+    {
+        $acXMLWithFiles = '<?xml version="1.0" encoding="utf-8"?>'."\n";
+        $acXMLWithFiles .= '<Message>'."\n";
+
+        foreach ($files as $file) {
+            $acXMLWithFiles .= '<FileName>'. $file['FileName'] . '</FileName>'."\n";
+            $acXMLWithFiles .= '<File>'. $file['File'] . '</File>'."\n";
+
+            if (isset($file['Dossier'])) {
+                $acXMLWithFiles .= '<File>'. $file['Dossier'] . '</Dossier>'."\n";
+            }
+        }
+
+        $acXMLWithFiles .= '</Message>';
+
+        $response = $this->getSoapClient()->ReceiveFileWithComment($acXMLWithFiles);
+
+        return $this->decodeResponse($response);
+    }
 }

@@ -119,6 +119,11 @@ class Message extends BaseObject
     public $KeepAlive;
 
     /**
+     * @var string
+     */
+    public $Success;
+
+    /**
      * Map the properties to a given type
      *
      * @var array

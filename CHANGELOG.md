@@ -6,3 +6,4 @@
 * Implemented getAppendices
 * Implemented keepAlive
 * Implemented receiveFile
+* Implemented receiveFileWithComment
