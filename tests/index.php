@@ -30,7 +30,7 @@ try {
 //            'FileName' => 'foo.xml',
 //        ),
 //    );
-//	  $response = $dbFact->receiveFile($files);
+//	  $response = $dbFact->receiveFile($files, 'Hoa_Test');
 //    $response = $dbFact->receiveFileWithComment($files);
 } catch (Exception $e) {
     var_dump($e);

@@ -474,9 +474,10 @@ class DBFact extends BaseSoapClient
 
     /**
      * @param  array $files
+     * @param  string[optional] $dossier
      * @return bool
      */
-    public function receiveFile(array $files)
+    public function receiveFile(array $files, $dossier = null)
     {
         $acXMLWithFiles = '<?xml version="1.0" encoding="utf-8"?>'."\n";
         $acXMLWithFiles .= '<Message>'."\n";
@@ -489,6 +490,10 @@ class DBFact extends BaseSoapClient
                 $acXMLWithFiles .= '<File>'. $file['Dossier'] . '</Dossier>'."\n";
             }
         }
+
+	    if ($dossier != null) {
+		    $acXMLWithFiles .= '<Dossier>' . $dossier . '</Dossier>'."\n";
+	    }
 
         $acXMLWithFiles .= '</Message>';
 
@@ -497,9 +502,10 @@ class DBFact extends BaseSoapClient
 
     /**
      * @param  array                             $files
+     * @param  string[optional]                  $dossier
      * @return TijsVerkoyen\DBFact\Types\Message
      */
-    public function receiveFileWithComment(array $files)
+    public function receiveFileWithComment(array $files, $dossier = null)
     {
         $acXMLWithFiles = '<?xml version="1.0" encoding="utf-8"?>'."\n";
         $acXMLWithFiles .= '<Message>'."\n";
@@ -512,6 +518,10 @@ class DBFact extends BaseSoapClient
                 $acXMLWithFiles .= '<File>'. $file['Dossier'] . '</Dossier>'."\n";
             }
         }
+
+	    if ($dossier != null) {
+		    $acXMLWithFiles .= '<Dossier>' . $dossier . '</Dossier>'."\n";
+	    }
 
         $acXMLWithFiles .= '</Message>';
 
