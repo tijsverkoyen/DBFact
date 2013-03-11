@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<Envelop>
+	<Order>
+		<Head>
+			<CustomerID>3261</CustomerID>
+			<New_Guid></New_Guid>
+			<OrderDate>20130308</OrderDate>
+			<DeliveryDate>20130320</DeliveryDate>
+			<Reference></Reference>
+			<CustomerReference><![CDATA[THIS IS A TEST]]></CustomerReference>
+			<VAT_Type_Code></VAT_Type_Code>
+			<Representative></Representative>
+			<Payment_Code></Payment_Code>
+			<Memo><![CDATA[THIS IS A TEST]]></Memo>
+			<DeliveryType Type="01"></DeliveryType>
+		</Head>
+		<Body>
+			<Line>
+				<ItemID>1189</ItemID>
+				<Qty>8</Qty>
+				<Price Vat_Exclusive='25,06'></Price>
+			</Line>
+			<Line>
+				<ItemID>101</ItemID>
+				<Qty>3</Qty>
+				<Price Vat_Exclusive='82,83'></Price>
+			</Line>
+			<Line>
+				<ItemID>854</ItemID>
+				<Qty>1</Qty>
+				<Price Vat_Exclusive='82,83'></Price>
+			</Line>
+		</Body>
+	</Order>
+</Envelop>

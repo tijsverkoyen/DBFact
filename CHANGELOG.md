@@ -5,3 +5,4 @@
 * Implemented getMultipleArtInfo
 * Implemented getAppendices
 * Implemented keepAlive
+* Implemented receiveFile

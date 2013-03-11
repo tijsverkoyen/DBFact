@@ -471,4 +471,27 @@ class DBFact extends BaseSoapClient
 
         return $this->decodeResponse($response);
     }
+
+    /**
+     * @param  array $files
+     * @return bool
+     */
+    public function receiveFile(array $files)
+    {
+        $acXMLWithFiles = '<?xml version="1.0" encoding="utf-8"?>'."\n";
+        $acXMLWithFiles .= '<Message>'."\n";
+
+        foreach ($files as $file) {
+            $acXMLWithFiles .= '<FileName>'. $file['FileName'] . '</FileName>'."\n";
+            $acXMLWithFiles .= '<File>'. $file['File'] . '</File>'."\n";
+
+            if (isset($file['Dossier'])) {
+                $acXMLWithFiles .= '<File>'. $file['Dossier'] . '</Dossier>'."\n";
+            }
+        }
+
+        $acXMLWithFiles .= '</Message>';
+
+        return $this->getSoapClient()->ReceiveFile($acXMLWithFiles);
+    }
 }
