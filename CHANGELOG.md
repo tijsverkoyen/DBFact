@@ -1,6 +1,7 @@
 # Changelog since 1.0.1
 
 * Made it possible to pass a Dossier for the receiveFile-methods.
+* Implemented the WebFiche-object
 
 # Changelog since 1.0.0
 

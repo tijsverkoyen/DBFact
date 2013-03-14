@@ -416,7 +416,7 @@ class Artikel extends BaseObject
             'VeldD1', 'VeldD2', 'VeldD3', 'VeldD4', 'VeldD5',
         ),
         'Custom' => array(
-            'Prijzen', 'Kosten'
+            'Prijzen', 'Kosten', 'WebFiche',
         ),
     );
 }
