@@ -16,7 +16,7 @@ use TijsVerkoyen\DBFact\Types\Message;
 class DBFact extends BaseSoapClient
 {
     const DEBUG = false;
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     /**
      * The soapclient
