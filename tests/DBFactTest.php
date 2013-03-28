@@ -66,6 +66,15 @@ class DBFactTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Check if an items is a Ladres
+     * @param $item
+     */
+    private function isLadres($item)
+    {
+        $this->assertInstanceOf('\TijsVerkoyen\DBFact\Types\Ladres', $item);
+    }
+
+    /**
      * Check if an item is a Message
      * @param $item
      */
@@ -179,6 +188,18 @@ class DBFactTest extends PHPUnit_Framework_TestCase
         $response = $this->dbFact->keepAlive($response->SessionId);
         $this->assertInstanceOf('TijsVerkoyen\DBFact\Types\Message', $response);
         $this->assertEquals('Ok', $response->KeepAlive);
+    }
+
+    /**
+     * Tests DBFact->ladresExport
+     */
+    public function testLadresExport()
+    {
+        $response = $this->dbFact->login(LOGIN, PASSWORD);
+        $response = $this->dbFact->ladresExport($response->SessionId, EXTRA_PASSWORD, 'ladres.L_TypAdr = 2');
+        foreach ($response as $item) {
+            $this->isLadres($item);
+        }
     }
 
     /**

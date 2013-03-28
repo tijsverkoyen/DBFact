@@ -402,6 +402,25 @@ class DBFact extends BaseSoapClient
 
     /**
      * @param $acSessionId
+     * @param $acExtraPaswoord
+     * @param $acWhere
+     * @return array
+     */
+    public function ladresExport($acSessionId, $acExtraPaswoord, $acWhere)
+    {
+        $response = $this->getSoapClient()->LadresExport($acSessionId, $acExtraPaswoord, $acWhere);
+        $response = $this->decodeZipResponse($response);
+
+        $return = array();
+        foreach ($response->crs_ladres as $item) {
+            $return[] = DBFact::convertToObject($item, 'TijsVerkoyen\DBFact\Types\Ladres');
+        }
+
+        return $return;
+    }
+
+    /**
+     * @param $acSessionId
      * @param  array                                $appendixIds
      * @return TijsVerkoyen\DBFact\Types\Appendices
      */

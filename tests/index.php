@@ -20,6 +20,7 @@ try {
 //    $response = $dbFact->artExport($sessionId, EXTRA_PASSWORD, '');
 //    $response = $dbFact->getArtImage($sessionId, array(119, 120));
 //    $response = $dbFact->getMultipleArtInfo($sessionId, array(2, 3), 1);
+//    $response = $dbFact->LadresExport($sessionId, EXTRA_PASSWORD, 'ladres.L_TypAdr = 2 AND ladres.L_Relnum = '. $response->CustomerNumber);
 //    $response = $dbFact->getAppendices($sessionId, array(10583, 10574));
 //    $response = $dbFact->getAppendicesGezipt($sessionId, null, array('P:\MARKETING\PRODUCTINFO\HARMAN KARDON\TECHNISCHE FICHES\SPECIFICATION SHEET - GO + PLAY II (DUTCH).PDF'));
 //    $response = $dbFact->getAppendicesGezipt($sessionId, array('10573'));
