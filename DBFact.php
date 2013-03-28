@@ -492,7 +492,7 @@ class DBFact extends BaseSoapClient
     }
 
     /**
-     * @param  array $files
+     * @param  array            $files
      * @param  string[optional] $dossier
      * @return bool
      */
@@ -510,9 +510,9 @@ class DBFact extends BaseSoapClient
             }
         }
 
-	    if ($dossier != null) {
-		    $acXMLWithFiles .= '<Dossier>' . $dossier . '</Dossier>'."\n";
-	    }
+        if ($dossier != null) {
+            $acXMLWithFiles .= '<Dossier>' . $dossier . '</Dossier>'."\n";
+        }
 
         $acXMLWithFiles .= '</Message>';
 
@@ -538,9 +538,9 @@ class DBFact extends BaseSoapClient
             }
         }
 
-	    if ($dossier != null) {
-		    $acXMLWithFiles .= '<Dossier>' . $dossier . '</Dossier>'."\n";
-	    }
+        if ($dossier != null) {
+            $acXMLWithFiles .= '<Dossier>' . $dossier . '</Dossier>'."\n";
+        }
 
         $acXMLWithFiles .= '</Message>';
 
