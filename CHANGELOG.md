@@ -3,6 +3,7 @@
 * Made it possible to pass a Dossier for the receiveFile-methods.
 * Implemented the WebFiche-object
 * Implemented LadresExport
+* Implemented RelExport
 
 # Changelog since 1.0.0
 

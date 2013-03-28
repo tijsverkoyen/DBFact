@@ -84,6 +84,15 @@ class DBFactTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Check if an items is a Relatie
+     * @param $item
+     */
+    private function isRelatie($item)
+    {
+        $this->assertInstanceOf('\TijsVerkoyen\DBFact\Types\Relatie', $item);
+    }
+
+    /**
      * Tests DBFact->getTimeOut()
      */
     public function testGetTimeOut()
@@ -230,5 +239,17 @@ class DBFactTest extends PHPUnit_Framework_TestCase
         );
         $response = $this->dbFact->receiveFileWithComment($files);
         $this->assertEquals('OK', $response->Success);
+    }
+
+    /**
+     * Tests DBFact->relExport()
+     */
+    public function testRelExport()
+    {
+        $response = $this->dbFact->login(LOGIN, PASSWORD);
+        $response = $this->dbFact->relExport($response->SessionId, EXTRA_PASSWORD, 'R_Nummer = '. $response->CustomerNumber);
+        foreach ($response as $item) {
+            $this->isRelatie($item);
+        }
     }
 }

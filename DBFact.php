@@ -548,4 +548,23 @@ class DBFact extends BaseSoapClient
 
         return $this->decodeResponse($response);
     }
+
+    /**
+     * @param $acSessionId
+     * @param $acExtraPaswoord
+     * @param $acWhere
+     * @return array
+     */
+    public function relExport($acSessionId, $acExtraPaswoord, $acWhere)
+    {
+        $response = $this->getSoapClient()->RelExport($acSessionId, $acExtraPaswoord, $acWhere);
+        $response = $this->decodeZipResponse($response);
+
+        $return = array();
+        foreach ($response->Relatie as $item) {
+            $return[] = DBFact::convertToObject($item, 'TijsVerkoyen\DBFact\Types\Relatie');
+        }
+
+        return $return;
+    }
 }
