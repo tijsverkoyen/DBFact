@@ -42,6 +42,11 @@ class BaseObject
                 }
                 $value = $items;
             } elseif (
+               isset($this->typeMap['bool']) &&
+               in_array($name, $this->typeMap['bool'])
+            ) {
+                $value = (strtolower($value) == 'true');
+            } elseif (
                isset($this->typeMap['float']) &&
                in_array($name, $this->typeMap['float'])
             ) {
