@@ -123,6 +123,11 @@ class Message extends BaseObject
      */
     public $Success;
 
+	/**
+	 * @var TransportFee
+	 */
+	public $TransportFee;
+
     /**
      * Map the properties to a given type
      *
@@ -132,5 +137,8 @@ class Message extends BaseObject
         'Collection' => array(
             'Article',
         ),
+        'Custom' => array(
+	        'TransportFee'
+        )
     );
 }
