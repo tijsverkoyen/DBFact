@@ -135,7 +135,7 @@ class Message extends BaseObject
      */
     protected $typeMap = array(
         'Collection' => array(
-            'Article',
+            'Article', 'FacCre', 'ServiceRapport', 'BBK'
         ),
         'Custom' => array(
 	        'TransportFee'
