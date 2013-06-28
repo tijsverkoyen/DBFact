@@ -594,4 +594,46 @@ class DBFact extends BaseSoapClient
 
 		return $response;
 	}
+
+	/**
+	 * @param $acSessionId
+	 * @param $acExtraPaswoord
+	 * @param $acWhere
+	 * @return object
+	 */
+	public function FacCreExport($acSessionId, $acExtraPaswoord, $acWhere)
+	{
+		$response = $this->getSoapClient()->FacCreExport($acSessionId, $acExtraPaswoord, $acWhere);
+		$response = $this->decodeResponse($response);
+
+		return $response;
+	}
+
+	/**
+	 * @param $acSessionId
+	 * @param $acExtraPaswoord
+	 * @param $acWhere
+	 * @return object
+	 */
+	public function SrvExport($acSessionId, $acExtraPaswoord, $acWhere)
+	{
+		$response = $this->getSoapClient()->SrvExport($acSessionId, $acExtraPaswoord, $acWhere);
+		$response = $this->decodeResponse($response);
+
+		return $response;
+	}
+
+	/**
+	 * @param $acSessionId
+	 * @param $acExtraPaswoord
+	 * @param $acWhere
+	 * @return object
+	 */
+	public function BBKExport($acSessionId, $acExtraPaswoord, $acWhere)
+	{
+		$response = $this->getSoapClient()->BBKExport($acSessionId, $acExtraPaswoord, $acWhere);
+		$response = $this->decodeResponse($response);
+
+		return $response;
+	}
 }
