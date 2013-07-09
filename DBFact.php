@@ -636,4 +636,32 @@ class DBFact extends BaseSoapClient
 
 		return $response;
 	}
+
+	/**
+	 * @param $acSessionId
+	 * @param $acExtraPassword
+	 * @param $acWhere
+	 * @return object
+	 */
+	public function BOKlExport($acSessionId, $acExtraPassword, $acWhere)
+	{
+		$response = $this->getSoapClient()->BOKlExport($acSessionId, $acExtraPassword, $acWhere);
+		$response = $this->decodeResponse($response);
+
+		return $response;
+	}
+
+	/**
+	 * @param $acSessionId
+	 * @param $acExtraPaswoord
+	 * @param $acWhere
+	 * @return object
+	 */
+	public function TurnOverExport($acSessionId, $acExtraPaswoord, $acWhere)
+	{
+		$response = $this->getSoapClient()->TurnOverExport($acSessionId, $acExtraPaswoord, $acWhere);
+		$response = $this->decodeResponse($response);
+
+		return $response;
+	}
 }
