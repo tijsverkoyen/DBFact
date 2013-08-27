@@ -568,18 +568,22 @@ class DBFact extends BaseSoapClient
         return $return;
     }
 
-	/**
-	 * @param $acSessionId
-	 * @param $anRelNum
-	 * @return mixed
-	 */
-	public function TransportFeeExtended($acSessionId, $anRelNum)
-	{
-		$response = $this->getSoapClient()->TransportFeeExtended($acSessionId, $anRelNum, '', '', '', '');
-		$response = $this->decodeResponse($response);
+    /**
+     * @param $acSessionId
+     * @param $anRelNum
+     * @param $anTransId
+     * @param $anBedrag
+     * @param $anValuta
+     * @param $adDatum
+     * @return mixed
+     */
+    public function TransportFeeExtended($acSessionId, $anRelNum, $anTransId, $anBedrag, $anValuta, $adDatum)
+    {
+        $response = $this->getSoapClient()->TransportFeeExtended($acSessionId, $anRelNum, $anTransId, $anBedrag, $anValuta, $adDatum);
+        $response = $this->decodeResponse($response);
 
-		return $response;
-	}
+        return $response;
+    }
 
 	/**
 	 * @param $acSessionId
