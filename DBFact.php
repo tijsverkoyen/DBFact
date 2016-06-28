@@ -58,7 +58,7 @@ class DBFact extends BaseSoapClient
      *
      * @param string[optional] $wsdl The location of the WSDL-file
      */
-    public function __construct($wsdl)
+    public function __construct($wsdl = null)
     {
         if ($wsdl !== null) {
             $this->setWsdl($wsdl);
@@ -84,9 +84,11 @@ class DBFact extends BaseSoapClient
     /**
      * Decode a response
      *
-     * @param  mixed  $response
+     * @param  mixed $response
      *
      * @return object
+     *
+     * @throws Exception
      */
     private function decodeResponse($response)
     {
@@ -142,6 +144,8 @@ class DBFact extends BaseSoapClient
      * @param  string $response
      *
      * @return object
+     *
+     * @throws Exception
      */
     private function decodeZipResponse($response)
     {
@@ -364,10 +368,12 @@ class DBFact extends BaseSoapClient
     }
 
     /**
-     * @param  string                           $acSessionId
-     * @param  array                            $acXmlMetImageIds
+     * @param  string $acSessionId
+     * @param array $imageIds
      *
      * @return TijsVerkoyen\DBFact\Types\Images
+     *
+     * @throws Exception
      */
     public function getArtImage($acSessionId, array $imageIds)
     {
@@ -453,10 +459,12 @@ class DBFact extends BaseSoapClient
 
     /**
      * @param $acSessionId
-     * @param  array[optional]                      $appendixIds
-     * @param  array[optional]                      $fullpaths
+     * @param array $appendixIds
+     * @param array $fullPaths
      *
      * @return TijsVerkoyen\DBFact\Types\Appendices
+     *
+     * @throws Exception
      */
     public function getAppendicesGezipt($acSessionId, array $appendixIds = null, array $fullPaths = null)
     {
