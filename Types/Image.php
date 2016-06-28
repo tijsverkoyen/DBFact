@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Image class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Image extends BaseObject
 {
@@ -63,12 +64,12 @@ class Image extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'int' => array(
+    protected $typeMap = [
+        'int' => [
             'SizeInKb',
-        ),
-        'DateTime' => array(
+        ],
+        'DateTime' => [
             'DateTime',
-        ),
-    );
+        ],
+    ];
 }

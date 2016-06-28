@@ -1,5 +1,7 @@
 <?php
 
+namespace TijsVerkoyen\DBFact\Tests;
+
 require_once '../../../autoload.php';
 require_once 'config.php';
 require_once 'PHPUnit/Framework/TestCase.php';
@@ -14,7 +16,7 @@ class DBFactTest extends PHPUnit_Framework_TestCase
     /**
      * DBFact instance
      *
-     * @var	DBFact
+     * @var DBFact
      */
     private $dbFact;
 
@@ -67,6 +69,7 @@ class DBFactTest extends PHPUnit_Framework_TestCase
 
     /**
      * Check if an items is a Ladres
+     *
      * @param $item
      */
     private function isLadres($item)
@@ -76,6 +79,7 @@ class DBFactTest extends PHPUnit_Framework_TestCase
 
     /**
      * Check if an item is a Message
+     *
      * @param $item
      */
     private function isMessage($item)
@@ -85,6 +89,7 @@ class DBFactTest extends PHPUnit_Framework_TestCase
 
     /**
      * Check if an items is a Relatie
+     *
      * @param $item
      */
     private function isRelatie($item)
@@ -168,7 +173,7 @@ class DBFactTest extends PHPUnit_Framework_TestCase
     public function testGetArtImage()
     {
         $response = $this->dbFact->login(LOGIN, PASSWORD);
-        $response = $this->dbFact->getArtImage($response->SessionId, array(119, 120));
+        $response = $this->dbFact->getArtImage($response->SessionId, [119, 120]);
         $this->assertInstanceOf('TijsVerkoyen\DBFact\Types\Images', $response);
         foreach ($response->Image as $item) {
             $this->isImage($item);
@@ -181,7 +186,7 @@ class DBFactTest extends PHPUnit_Framework_TestCase
     public function testGetMultipleArtInfo()
     {
         $response = $this->dbFact->login(LOGIN, PASSWORD);
-        $response = $this->dbFact->getMultipleArtInfo($response->SessionId, array(2, 3), 1);
+        $response = $this->dbFact->getMultipleArtInfo($response->SessionId, [2, 3], 1);
         $this->assertInstanceOf('TijsVerkoyen\DBFact\Types\Message', $response);
         foreach ($response->Article as $item) {
             $this->isArticle($item);
@@ -216,12 +221,12 @@ class DBFactTest extends PHPUnit_Framework_TestCase
      */
     public function testReceiveFile()
     {
-        $files = array(
-            array(
+        $files = [
+            [
                 'File' => file_get_contents('./order.xml'),
                 'FileName' => 'order.xml',
-            ),
-        );
+            ],
+        ];
         $response = $this->dbFact->receiveFile($files);
         $this->assertTrue($response);
     }
@@ -231,12 +236,12 @@ class DBFactTest extends PHPUnit_Framework_TestCase
      */
     public function testReceiveFileWithComment()
     {
-        $files = array(
-            array(
+        $files = [
+            [
                 'File' => file_get_contents('./order.xml'),
                 'FileName' => 'order.xml',
-            ),
-        );
+            ],
+        ];
         $response = $this->dbFact->receiveFileWithComment($files);
         $this->assertEquals('OK', $response->Success);
     }
@@ -247,7 +252,11 @@ class DBFactTest extends PHPUnit_Framework_TestCase
     public function testRelExport()
     {
         $response = $this->dbFact->login(LOGIN, PASSWORD);
-        $response = $this->dbFact->relExport($response->SessionId, EXTRA_PASSWORD, 'R_Nummer = '. $response->CustomerNumber);
+        $response = $this->dbFact->relExport(
+            $response->SessionId,
+            EXTRA_PASSWORD,
+            'R_Nummer = '. $response->CustomerNumber
+        );
         foreach ($response as $item) {
             $this->isRelatie($item);
         }

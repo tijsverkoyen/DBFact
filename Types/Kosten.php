@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Kosten class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Kosten extends BaseObject
 {
@@ -83,12 +84,12 @@ class Kosten extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'float' => array(
+    protected $typeMap = [
+        'float' => [
             'Bebat', 'Recupel', 'Auteur', 'Reprobel', 'FostPlus', 'Leeggoed',
             'Andere', 'BebatInclBtw', 'RecupelInclBtw', 'AuteurInclBtw',
             'ReprobelInclBtw', 'FostPlusInclBtw', 'LeeggoedInclBtw',
             'AndereInclBtw',
-        )
-    );
+        ],
+    ];
 }

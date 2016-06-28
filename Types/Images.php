@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Images class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Images extends BaseObject
 {
@@ -23,9 +24,9 @@ class Images extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'Collection' => array(
-            'Image'
-        ),
-    );
+    protected $typeMap = [
+        'Collection' => [
+            'Image',
+        ],
+    ];
 }

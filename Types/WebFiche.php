@@ -1,30 +1,31 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Image class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class WebFiche extends BaseObject
 {
     /**
-     * @var strings
+     * @var string
      */
     public $WebArticle;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Promo;
 
     /**
-     * @var strings
+     * @var string
      */
     public $PromoStartDate;
 
     /**
-     * @var strings
+     * @var string
      */
     public $PromoEndDate;
 
@@ -34,82 +35,82 @@ class WebFiche extends BaseObject
     public $IdentityNumber;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Category1;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Category2;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Category3;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Category4;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Color;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Size;
 
     /**
-     * @var strings
+     * @var string
      */
     public $WebLink;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Memo1;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Memo2;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Memo3;
 
     /**
-     * @var strings
+     * @var string
      */
     public $Memo4;
 
     /**
-     * @var strings
+     * @var string
      */
     public $HtmlMemo1;
 
     /**
-     * @var strings
+     * @var string
      */
     public $HtmlMemo2;
 
     /**
-     * @var strings
+     * @var string
      */
     public $HtmlMemo3;
 
     /**
-     * @var strings
+     * @var string
      */
     public $HtmlMemo4;
 
     /**
-     * @var strings
+     * @var string
      */
     public $IcecatLink;
 
@@ -118,9 +119,9 @@ class WebFiche extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'int' => array(
+    protected $typeMap = [
+        'int' => [
             'IdentityNumber',
-        ),
-    );
+        ],
+    ];
 }

@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Article class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Article extends BaseObject
 {
@@ -203,14 +204,14 @@ class Article extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'float' => array(
+    protected $typeMap = [
+        'float' => [
             'KortExclBtw', 'KortInclBtw', 'NettoExclBtw', 'NettoInclBtw',
             'BrutoExclBtw', 'BrutoInclBtw', 'a_winkel', 'a_winkelinclkosten',
             'a_inkoop', 'a_vrystock', 'a_winex', 'a_basisex', 'a_dealer',
             'a_aanbevol', 'a_minverk', 'a_prijs1', 'a_prijs2', 'a_prijs3',
             'a_prijs4', 'a_prijs5', 'a_btwcode', 'a_maxkort', 'a_minmarge',
-            'a_maat', 'a_typsamen', 'b_btw1', 'originkoop'
-        ),
-    );
+            'a_maat', 'a_typsamen', 'b_btw1', 'originkoop',
+        ],
+    ];
 }

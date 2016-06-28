@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Message class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Message extends BaseObject
 {
@@ -123,22 +124,22 @@ class Message extends BaseObject
      */
     public $Success;
 
-	/**
-	 * @var TransportFee
-	 */
-	public $TransportFee;
+    /**
+     * @var TransportFee
+     */
+    public $TransportFee;
 
     /**
      * Map the properties to a given type
      *
      * @var array
      */
-    protected $typeMap = array(
-        'Collection' => array(
-            'Article', 'FacCre', 'ServiceRapport', 'BBK', 'Backorder', 'Relatie'
-        ),
-        'Custom' => array(
-	        'TransportFee'
-        )
-    );
+    protected $typeMap = [
+        'Collection' => [
+            'Article', 'FacCre', 'ServiceRapport', 'BBK', 'Backorder', 'Relatie',
+        ],
+        'Custom' => [
+            'TransportFee',
+        ],
+    ];
 }

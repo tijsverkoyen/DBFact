@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Prijzen class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Prijzen extends BaseObject
 {
@@ -123,16 +124,16 @@ class Prijzen extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'float' => array(
+    protected $typeMap = [
+        'float' => [
             'WinkelIncl', 'WinkelExcl', 'Dealer', 'PromoPrijsExcl',
             'PromoPrijsIncl', 'PromoPrijsDealerExcl', 'PromoPrijsDealerIncl',
             'PromoPrijsMinVerkExcl', 'PromoPrijsMinVerkIncl', 'AanbevolenIncl',
             'BasisExcl', 'MinimumVerkoopExcl', 'ValutaNetto', 'Prijs1',
-            'Prijs2', 'Prijs3', 'Prijs4', 'Prijs5'
-        ),
-        'DateTime' => array(
+            'Prijs2', 'Prijs3', 'Prijs4', 'Prijs5',
+        ],
+        'DateTime' => [
             'PromoPrijsVan', 'PromoPrijsTot',
-        ),
-    );
+        ],
+    ];
 }

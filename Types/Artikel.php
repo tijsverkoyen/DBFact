@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Artikel class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Artikel extends BaseObject
 {
@@ -393,11 +394,11 @@ class Artikel extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'array' => array(
-            'Images', 'Appendices', 'Barcodes'
-        ),
-        'float' => array(
+    protected $typeMap = [
+        'array' => [
+            'Images', 'Appendices', 'Barcodes',
+        ],
+        'float' => [
             'Stock', 'MinimumStock', 'NominaleStock',
             'VeldN1', 'VeldN2', 'VeldN3', 'VeldN4', 'VeldN5',
             'BtwPercentage',
@@ -406,17 +407,17 @@ class Artikel extends BaseObject
             'Inhoud',
             'M3',
             'VerpakkingsGewicht', 'BrutoGewichtInKg', 'NettoGewichtInKg',
-        ),
-        'int' => array(
+        ],
+        'int' => [
             'VerpakkingsLengte', 'VerpakkingsBreedte', 'VerpakkingsHoogte',
             'ArtikelLengte', 'ArtikelBreedte', 'ArtikelHoogte',
-        ),
-        'DateTime' => array(
+        ],
+        'DateTime' => [
             'CreatieDat', 'VerwachtDat',
             'VeldD1', 'VeldD2', 'VeldD3', 'VeldD4', 'VeldD5',
-        ),
-        'Custom' => array(
+        ],
+        'Custom' => [
             'Prijzen', 'Kosten', 'WebFiche',
-        ),
-    );
+        ],
+    ];
 }
