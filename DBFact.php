@@ -355,6 +355,29 @@ class DBFact extends BaseSoapClient
     }
 
     /**
+     * @param $acSessionId
+     * @param $acExtraPaswoord
+     * @param $acWhere
+     * @param $dossier
+     *
+     * @return array
+     *
+     * @throws Exception
+     */
+    public function artExportDossier($acSessionId, $acExtraPaswoord, $acWhere, $dossier)
+    {
+        $response = $this->getSoapClient()->ArtExportDossier($acSessionId, $acExtraPaswoord, $acWhere, $dossier);
+        $response = $this->decodeZipResponse($response);
+
+        $return = [];
+        foreach ($response->Artikel as $item) {
+            $return[] = self::convertToObject($item, 'TijsVerkoyen\DBFact\Types\Artikel');
+        }
+
+        return $return;
+    }
+
+    /**
      * @param  string  $acLogin
      * @param  string  $acPassword
      *
