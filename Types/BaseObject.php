@@ -85,6 +85,9 @@ class BaseObject
         return $date;
     }
 
+    /**
+     * @return array
+     */
     protected static function getPossibleMappedTypes()
     {
         return [
@@ -98,6 +101,11 @@ class BaseObject
         ];
     }
 
+    /**
+     * @param $name
+     *
+     * @return mixed
+     */
     protected function getMappedTypeForName($name)
     {
         foreach (self::getPossibleMappedTypes() as $type) {
