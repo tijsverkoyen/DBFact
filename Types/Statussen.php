@@ -1,4 +1,5 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
@@ -8,14 +9,14 @@ namespace TijsVerkoyen\DBFact\Types;
  */
 class Statussen extends BaseObject
 {
-	/**
-	 * @var array
-	 */
-	public $Status;
+    /**
+     * @var array
+     */
+    public $Status;
 
-	protected $typeMap = array(
-		'Collection' => array(
-			'Status'
-		)
-	);
+    protected $typeMap = [
+        'Collection' => [
+            'Status',
+        ],
+    ];
 }

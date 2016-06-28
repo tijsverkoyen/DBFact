@@ -1,4 +1,5 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
@@ -8,39 +9,39 @@ namespace TijsVerkoyen\DBFact\Types;
  */
 class Status extends BaseObject
 {
-	/**
-	 * @var string
-	 */
-	public $Code;
+    /**
+     * @var string
+     */
+    public $Code;
 
-	/**
-	 * @var \DateTime
-	 */
-	public $Datum;
+    /**
+     * @var \DateTime
+     */
+    public $Datum;
 
-	/**
-	 * @var string
-	 */
-	public $Uur;
+    /**
+     * @var string
+     */
+    public $Uur;
 
-	/**
-	 * @var string
-	 */
-	public $Opmerking;
+    /**
+     * @var string
+     */
+    public $Opmerking;
 
-	/**
-	 * @var string
-	 */
-	public $Technieker;
+    /**
+     * @var string
+     */
+    public $Technieker;
 
-	/**
-	 * @var string
-	 */
-	public $Omschrijving;
+    /**
+     * @var string
+     */
+    public $Omschrijving;
 
-	protected $typeMap = array(
-		'DateTime' => array(
-			'Datum'
-		)
-	);
+    protected $typeMap = [
+        'DateTime' => [
+            'Datum',
+        ],
+    ];
 }

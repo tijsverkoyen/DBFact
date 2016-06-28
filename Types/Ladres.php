@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Ladres class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Ladres extends BaseObject
 {
@@ -338,9 +339,9 @@ class Ladres extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'int' => array('l_typadr', 'l_categ1', 'l_categ2', 'l_categ3', 'l_categ4', 'l_categ5'),
-        'bool' => array('l_defadr', 'l_deffadr', 'l_linkadr', 'l_website'),
-        'float' => array('l_distance', 'l_drivcost', 'l_lattitud', 'l_longitud'),
-    );
+    protected $typeMap = [
+        'int' => ['l_typadr', 'l_categ1', 'l_categ2', 'l_categ3', 'l_categ4', 'l_categ5'],
+        'bool' => ['l_defadr', 'l_deffadr', 'l_linkadr', 'l_website'],
+        'float' => ['l_distance', 'l_drivcost', 'l_lattitud', 'l_longitud'],
+    ];
 }

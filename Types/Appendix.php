@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Appendix class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Appendix extends BaseObject
 {
@@ -83,12 +84,12 @@ class Appendix extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'int' => array(
+    protected $typeMap = [
+        'int' => [
             'FileSizeInBytes',
-        ),
-        'DateTime' => array(
+        ],
+        'DateTime' => [
             'DateTime',
-        ),
-    );
+        ],
+    ];
 }

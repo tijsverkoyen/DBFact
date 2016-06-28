@@ -8,10 +8,12 @@ use TijsVerkoyen\DBFact\Types\Message;
 /**
  * DBFact class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
- * @version		1.0.0
- * @copyright	Copyright (c) Tijs Verkoyen. All rights reserved.
- * @license		BSD License
+ * @author    Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ *
+ * @version   1.0.0
+ *
+ * @copyright Copyright (c) Tijs Verkoyen. All rights reserved.
+ * @license   BSD License
  */
 class DBFact extends BaseSoapClient
 {
@@ -49,7 +51,7 @@ class DBFact extends BaseSoapClient
     /**
      * @var array
      */
-    private $classMaps = array();
+    private $classMaps = [];
 
     /**
      * Default constructor
@@ -68,11 +70,12 @@ class DBFact extends BaseSoapClient
      *
      * @param  string $xml
      * @param  string $className
+     *
      * @return object
      */
     public static function convertToObject($xml, $className)
     {
-        $response = new $className;
+        $response = new $className();
         $response->initialize($xml);
 
         return $response;
@@ -82,6 +85,7 @@ class DBFact extends BaseSoapClient
      * Decode a response
      *
      * @param  mixed  $response
+     *
      * @return object
      */
     private function decodeResponse($response)
@@ -109,7 +113,7 @@ class DBFact extends BaseSoapClient
 
         $path = realpath(dirname(__FILE__) . '/../../' . str_replace('\\', '/', $className) . '.php');
         if (file_exists($path)) {
-            return DBFact::convertToObject($xml, $className);
+            return self::convertToObject($xml, $className);
         } else {
             $response = $xml;
 
@@ -136,6 +140,7 @@ class DBFact extends BaseSoapClient
      * Decode a response that was zipped
      *
      * @param  string $response
+     *
      * @return object
      */
     private function decodeZipResponse($response)
@@ -231,14 +236,14 @@ class DBFact extends BaseSoapClient
     {
         // create the client if needed
         if (!$this->soapclient) {
-            $options = array(
+            $options = [
                 'trace' => self::DEBUG,
                 'exceptions' => false,
                 'connection_timeout' => $this->getTimeout(),
                 'user_agent' => $this->getUserAgent(),
                 'cache_wsdl' => WSDL_CACHE_BOTH,
                 'classmap' => $this->classMaps,
-            );
+            ];
 
             $this->soapClient = new \SoapClient($this->getWsdl(), $options);
         }
@@ -329,6 +334,7 @@ class DBFact extends BaseSoapClient
      * @param  string $acSessionId
      * @param  string $acExtraPaswoord
      * @param  string $acWhere
+     *
      * @return array
      */
     public function artExport($acSessionId, $acExtraPaswoord, $acWhere)
@@ -336,9 +342,9 @@ class DBFact extends BaseSoapClient
         $response = $this->getSoapClient()->ArtExport($acSessionId, $acExtraPaswoord, $acWhere);
         $response = $this->decodeZipResponse($response);
 
-        $return = array();
+        $return = [];
         foreach ($response->Artikel as $item) {
-            $return[] = DBFact::convertToObject($item, 'TijsVerkoyen\DBFact\Types\Artikel');
+            $return[] = self::convertToObject($item, 'TijsVerkoyen\DBFact\Types\Artikel');
         }
 
         return $return;
@@ -347,6 +353,7 @@ class DBFact extends BaseSoapClient
     /**
      * @param  string  $acLogin
      * @param  string  $acPassword
+     *
      * @return Message
      */
     public function login($acLogin, $acPassword)
@@ -359,6 +366,7 @@ class DBFact extends BaseSoapClient
     /**
      * @param  string                           $acSessionId
      * @param  array                            $acXmlMetImageIds
+     *
      * @return TijsVerkoyen\DBFact\Types\Images
      */
     public function getArtImage($acSessionId, array $imageIds)
@@ -375,13 +383,14 @@ class DBFact extends BaseSoapClient
         $response = $this->getSoapClient()->GetArtImage($acSessionId, $acXmlMetImageIds);
         $response = $this->decodeZipResponse($response);
 
-        return DBFact::convertToObject($response, 'TijsVerkoyen\DBFact\Types\Images');
+        return self::convertToObject($response, 'TijsVerkoyen\DBFact\Types\Images');
     }
 
     /**
      * @param $acSessionId
      * @param  array                             $artNummers
      * @param  null                              $anRelnum
+     *
      * @return TijsVerkoyen\DBFact\Types\Message
      */
     public function getMultipleArtInfo($acSessionId, array $artNummers = null, $anRelnum = null)
@@ -404,6 +413,7 @@ class DBFact extends BaseSoapClient
      * @param $acSessionId
      * @param $acExtraPaswoord
      * @param $acWhere
+     *
      * @return array
      */
     public function ladresExport($acSessionId, $acExtraPaswoord, $acWhere)
@@ -411,9 +421,9 @@ class DBFact extends BaseSoapClient
         $response = $this->getSoapClient()->LadresExport($acSessionId, $acExtraPaswoord, $acWhere);
         $response = $this->decodeZipResponse($response);
 
-        $return = array();
+        $return = [];
         foreach ($response->crs_ladres as $item) {
-            $return[] = DBFact::convertToObject($item, 'TijsVerkoyen\DBFact\Types\Ladres');
+            $return[] = self::convertToObject($item, 'TijsVerkoyen\DBFact\Types\Ladres');
         }
 
         return $return;
@@ -422,6 +432,7 @@ class DBFact extends BaseSoapClient
     /**
      * @param $acSessionId
      * @param  array                                $appendixIds
+     *
      * @return TijsVerkoyen\DBFact\Types\Appendices
      */
     public function getAppendices($acSessionId, array $appendixIds)
@@ -444,6 +455,7 @@ class DBFact extends BaseSoapClient
      * @param $acSessionId
      * @param  array[optional]                      $appendixIds
      * @param  array[optional]                      $fullpaths
+     *
      * @return TijsVerkoyen\DBFact\Types\Appendices
      */
     public function getAppendicesGezipt($acSessionId, array $appendixIds = null, array $fullPaths = null)
@@ -477,11 +489,12 @@ class DBFact extends BaseSoapClient
         $response = $this->getSoapClient()->GetAppendicesGezipt($acSessionId, $acXmlMetAppendixIds);
         $response = $this->decodeZipResponse($response);
 
-        return DBFact::convertToObject($response, 'TijsVerkoyen\DBFact\Types\Appendices');
+        return self::convertToObject($response, 'TijsVerkoyen\DBFact\Types\Appendices');
     }
 
     /**
      * @param $acSessionId
+     *
      * @return TijsVerkoyen\DBFact\Types\Message
      */
     public function keepAlive($acSessionId)
@@ -494,6 +507,7 @@ class DBFact extends BaseSoapClient
     /**
      * @param  array            $files
      * @param  string[optional] $dossier
+     *
      * @return bool
      */
     public function receiveFile(array $files, $dossier = null)
@@ -522,6 +536,7 @@ class DBFact extends BaseSoapClient
     /**
      * @param  array                             $files
      * @param  string[optional]                  $dossier
+     *
      * @return TijsVerkoyen\DBFact\Types\Message
      */
     public function receiveFileWithComment(array $files, $dossier = null)
@@ -553,6 +568,7 @@ class DBFact extends BaseSoapClient
      * @param $acSessionId
      * @param $acExtraPaswoord
      * @param $acWhere
+     *
      * @return array
      */
     public function relExport($acSessionId, $acExtraPaswoord, $acWhere)
@@ -560,9 +576,9 @@ class DBFact extends BaseSoapClient
         $response = $this->getSoapClient()->RelExport($acSessionId, $acExtraPaswoord, $acWhere);
         $response = $this->decodeZipResponse($response);
 
-        $return = array();
+        $return = [];
         foreach ($response->Relatie as $item) {
-            $return[] = DBFact::convertToObject($item, 'TijsVerkoyen\DBFact\Types\Relatie');
+            $return[] = self::convertToObject($item, 'TijsVerkoyen\DBFact\Types\Relatie');
         }
 
         return $return;
@@ -575,97 +591,111 @@ class DBFact extends BaseSoapClient
      * @param $anBedrag
      * @param $anValuta
      * @param $adDatum
+     *
      * @return mixed
      */
-    public function TransportFeeExtended($acSessionId, $anRelNum, $anTransId, $anBedrag, $anValuta, $adDatum)
+    public function transportFeeExtended($acSessionId, $anRelNum, $anTransId, $anBedrag, $anValuta, $adDatum)
     {
-        $response = $this->getSoapClient()->TransportFeeExtended($acSessionId, $anRelNum, $anTransId, $anBedrag, $anValuta, $adDatum);
+        $response = $this->getSoapClient()->TransportFeeExtended(
+            $acSessionId,
+            $anRelNum,
+            $anTransId,
+            $anBedrag,
+            $anValuta,
+            $adDatum
+        );
         $response = $this->decodeResponse($response);
 
         return $response;
     }
 
-	/**
-	 * @param $acSessionId
-	 * @param $acArtNummer
-	 * @param $anRelnum
-	 * @return object
-	 */
-	public function GetArtInfo($acSessionId, $acArtNummer, $anRelnum)
-	{
-		$response = $this->getSoapClient()->GetArtInfo($acSessionId, $acArtNummer, $anRelnum);
-		$response = $this->decodeResponse($response);
+    /**
+     * @param $acSessionId
+     * @param $acArtNummer
+     * @param $anRelnum
+     *
+     * @return object
+     */
+    public function getArtInfo($acSessionId, $acArtNummer, $anRelnum)
+    {
+        $response = $this->getSoapClient()->GetArtInfo($acSessionId, $acArtNummer, $anRelnum);
+        $response = $this->decodeResponse($response);
 
-		return $response;
-	}
+        return $response;
+    }
 
-	/**
-	 * @param $acSessionId
-	 * @param $acExtraPaswoord
-	 * @param $acWhere
-	 * @return object
-	 */
-	public function FacCreExport($acSessionId, $acExtraPaswoord, $acWhere)
-	{
-		$response = $this->getSoapClient()->FacCreExport($acSessionId, $acExtraPaswoord, $acWhere);
-		$response = $this->decodeResponse($response);
+    /**
+     * @param $acSessionId
+     * @param $acExtraPaswoord
+     * @param $acWhere
+     *
+     * @return object
+     */
+    public function facCreExport($acSessionId, $acExtraPaswoord, $acWhere)
+    {
+        $response = $this->getSoapClient()->FacCreExport($acSessionId, $acExtraPaswoord, $acWhere);
+        $response = $this->decodeResponse($response);
 
-		return $response;
-	}
+        return $response;
+    }
 
-	/**
-	 * @param $acSessionId
-	 * @param $acExtraPaswoord
-	 * @param $acWhere
-	 * @return object
-	 */
-	public function SrvExport($acSessionId, $acExtraPaswoord, $acWhere)
-	{
-		$response = $this->getSoapClient()->SrvExport($acSessionId, $acExtraPaswoord, $acWhere);
-		$response = $this->decodeResponse($response);
+    /**
+     * @param $acSessionId
+     * @param $acExtraPaswoord
+     * @param $acWhere
+     *
+     * @return object
+     */
+    public function srvExport($acSessionId, $acExtraPaswoord, $acWhere)
+    {
+        $response = $this->getSoapClient()->SrvExport($acSessionId, $acExtraPaswoord, $acWhere);
+        $response = $this->decodeResponse($response);
 
-		return $response;
-	}
+        return $response;
+    }
 
-	/**
-	 * @param $acSessionId
-	 * @param $acExtraPaswoord
-	 * @param $acWhere
-	 * @return object
-	 */
-	public function BBKExport($acSessionId, $acExtraPaswoord, $acWhere)
-	{
-		$response = $this->getSoapClient()->BBKExport($acSessionId, $acExtraPaswoord, $acWhere);
-		$response = $this->decodeResponse($response);
+    /**
+     * @param $acSessionId
+     * @param $acExtraPaswoord
+     * @param $acWhere
+     *
+     * @return object
+     */
+    public function bbkExport($acSessionId, $acExtraPaswoord, $acWhere)
+    {
+        $response = $this->getSoapClient()->BBKExport($acSessionId, $acExtraPaswoord, $acWhere);
+        $response = $this->decodeResponse($response);
 
-		return $response;
-	}
+        return $response;
+    }
 
-	/**
-	 * @param $acSessionId
-	 * @param $acExtraPassword
-	 * @param $acWhere
-	 * @return object
-	 */
-	public function BOKlExport($acSessionId, $acExtraPassword, $acWhere)
-	{
-		$response = $this->getSoapClient()->BOKlExport($acSessionId, $acExtraPassword, $acWhere);
-		$response = $this->decodeResponse($response);
+    /**
+     * @param $acSessionId
+     * @param $acExtraPassword
+     * @param $acWhere
+     *
+     * @return object
+     */
+    public function boklExport($acSessionId, $acExtraPassword, $acWhere)
+    {
+        $response = $this->getSoapClient()->BOKlExport($acSessionId, $acExtraPassword, $acWhere);
+        $response = $this->decodeResponse($response);
 
-		return $response;
-	}
+        return $response;
+    }
 
-	/**
-	 * @param $acSessionId
-	 * @param $acExtraPaswoord
-	 * @param $acWhere
-	 * @return object
-	 */
-	public function TurnOverExport($acSessionId, $acExtraPaswoord, $acWhere)
-	{
-		$response = $this->getSoapClient()->TurnOverExport($acSessionId, $acExtraPaswoord, $acWhere);
-		$response = $this->decodeResponse($response);
+    /**
+     * @param $acSessionId
+     * @param $acExtraPaswoord
+     * @param $acWhere
+     *
+     * @return object
+     */
+    public function turnOverExport($acSessionId, $acExtraPaswoord, $acWhere)
+    {
+        $response = $this->getSoapClient()->TurnOverExport($acSessionId, $acExtraPaswoord, $acWhere);
+        $response = $this->decodeResponse($response);
 
-		return $response;
-	}
+        return $response;
+    }
 }

@@ -1,10 +1,11 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
  * DBFact Appendices class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class Appendices extends BaseObject
 {
@@ -23,9 +24,9 @@ class Appendices extends BaseObject
      *
      * @var array
      */
-    protected $typeMap = array(
-        'Collection' => array(
-            'Appendix'
-        ),
-    );
+    protected $typeMap = [
+        'Collection' => [
+            'Appendix',
+        ],
+    ];
 }

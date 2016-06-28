@@ -1,4 +1,5 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
@@ -8,42 +9,42 @@ namespace TijsVerkoyen\DBFact\Types;
  */
 class ServiceRapport extends BaseObject
 {
-	/**
-	 * @var string
-	 */
-	public $ServiceNummer;
+    /**
+     * @var string
+     */
+    public $ServiceNummer;
 
-	/**
-	 * @var \DateTime
-	 */
-	public $Datum;
+    /**
+     * @var \DateTime
+     */
+    public $Datum;
 
-	/**
-	 * @var string
-	 */
-	public $RelatieNummer;
+    /**
+     * @var string
+     */
+    public $RelatieNummer;
 
-	/**
-	 * @var string
-	 */
-	public $RelatieNaam;
+    /**
+     * @var string
+     */
+    public $RelatieNaam;
 
-	/**
-	 * @var string
-	 */
-	public $Technieker;
+    /**
+     * @var string
+     */
+    public $Technieker;
 
-	/**
-	 * @var array
-	 */
-	public $Statussen;
+    /**
+     * @var array
+     */
+    public $Statussen;
 
-	protected $typeMap = array(
-		'DateTime' => array(
-			'Datum'
-		),
-		'Collection' => array(
-			'Statussen'
-		)
-	);
+    protected $typeMap = [
+        'DateTime' => [
+            'Datum',
+        ],
+        'Collection' => [
+            'Statussen',
+        ],
+    ];
 }

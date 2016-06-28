@@ -1,4 +1,5 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
@@ -8,23 +9,23 @@ namespace TijsVerkoyen\DBFact\Types;
  */
 class TransportFee extends BaseObject
 {
-	/**
-	 * @var string
-	 */
-	public $TransportArticle;
+    /**
+     * @var string
+     */
+    public $TransportArticle;
 
-	/**
-	 * @var string
-	 */
-	public $TransportArticleCode;
+    /**
+     * @var string
+     */
+    public $TransportArticleCode;
 
-	/**
-	 * @var float
-	 */
-	public $TransportUpTo;
+    /**
+     * @var float
+     */
+    public $TransportUpTo;
 
-	/**
-	 * @var float
-	 */
-	public $CustomTransportFee;
+    /**
+     * @var float
+     */
+    public $CustomTransportFee;
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 use TijsVerkoyen\DBFact\DBFact;
@@ -6,7 +7,7 @@ use TijsVerkoyen\DBFact\DBFact;
 /**
  * DBFact BaseObject class
  *
- * @author		Tijs Verkoyen <php-dbfact@verkoyen.eu>
+ * @author Tijs Verkoyen <php-dbfact@verkoyen.eu>
  */
 class BaseObject
 {
@@ -15,7 +16,7 @@ class BaseObject
      *
      * @var array
      */
-    protected $typeMap = array();
+    protected $typeMap = [];
 
     /**
      * Initialize the object
@@ -28,11 +29,8 @@ class BaseObject
             $name = (string) $property->getName();
             $value = $property;
 
-            if (
-                isset($this->typeMap['array']) &&
-                in_array($name, $this->typeMap['array'])
-            ) {
-                $items = array();
+            if (isset($this->typeMap['array']) && in_array($name, $this->typeMap['array'])) {
+                $items = [];
                 foreach ($property as $item) {
                     $itemName = (string) $item->getName();
                     $items[] = DBFact::convertToObject(
@@ -41,25 +39,13 @@ class BaseObject
                     );
                 }
                 $value = $items;
-            } elseif (
-               isset($this->typeMap['bool']) &&
-               in_array($name, $this->typeMap['bool'])
-            ) {
+            } elseif (isset($this->typeMap['bool']) && in_array($name, $this->typeMap['bool'])) {
                 $value = (strtolower($value) == 'true');
-            } elseif (
-               isset($this->typeMap['float']) &&
-               in_array($name, $this->typeMap['float'])
-            ) {
+            } elseif (isset($this->typeMap['float']) && in_array($name, $this->typeMap['float'])) {
                 $value = (float) str_replace(',', '.', $value);
-            } elseif(
-                isset($this->typeMap['int']) &&
-                in_array($name, $this->typeMap['int'])
-            ) {
+            } elseif (isset($this->typeMap['int']) && in_array($name, $this->typeMap['int'])) {
                 $value = (int) $value;
-            } elseif(
-                isset($this->typeMap['DateTime']) &&
-                in_array($name, $this->typeMap['DateTime'])
-            ) {
+            } elseif (isset($this->typeMap['DateTime']) && in_array($name, $this->typeMap['DateTime'])) {
                 if (substr_count($value, '/') > 0) {
                     $day = (int) substr($value, 0, 2);
                     $month = (int) substr($value, 3, 2);
@@ -76,19 +62,13 @@ class BaseObject
                     $value->setDate($year, $month, $day);
                     $value->setTime(0, 0, 0);
                 }
-            } elseif(
-                isset($this->typeMap['Custom']) &&
-                in_array($name, $this->typeMap['Custom'])
-            ) {
+            } elseif (isset($this->typeMap['Custom']) && in_array($name, $this->typeMap['Custom'])) {
                 $value = DBFact::convertToObject(
                     $property,
                     'TijsVerkoyen\\DBFact\\Types\\' . $name
                 );
-            } elseif(
-                isset($this->typeMap['Collection']) &&
-                in_array($name, $this->typeMap['Collection'])
-            ) {
-                $items = array();
+            } elseif (isset($this->typeMap['Collection']) && in_array($name, $this->typeMap['Collection'])) {
+                $items = [];
                 foreach ($xml->{$name} as $item) {
                     $itemName = (string) $item->getName();
                     $items[] = DBFact::convertToObject(

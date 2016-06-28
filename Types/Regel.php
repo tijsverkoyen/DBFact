@@ -1,4 +1,5 @@
 <?php
+
 namespace TijsVerkoyen\DBFact\Types;
 
 /**
@@ -8,62 +9,62 @@ namespace TijsVerkoyen\DBFact\Types;
  */
 class Regel extends BaseObject
 {
-	/**
-	 * @var string
-	 */
-	public $Artikel;
+    /**
+     * @var string
+     */
+    public $Artikel;
 
-	/**
-	 * @var string
-	 */
-	public $Referentie;
+    /**
+     * @var string
+     */
+    public $Referentie;
 
-	/**
-	 * @var string
-	 */
-	public $Omschrijving;
+    /**
+     * @var string
+     */
+    public $Omschrijving;
 
-	/**
-	 * @var float
-	 */
-	public $Aantal;
+    /**
+     * @var float
+     */
+    public $Aantal;
 
-	/**
-	 * @var float
-	 */
-	public $EenheidExcl;
+    /**
+     * @var float
+     */
+    public $EenheidExcl;
 
-	/**
-	 * @var int
-	 */
-	public $Korting;
+    /**
+     * @var int
+     */
+    public $Korting;
 
-	/**
-	 * @var float
-	 */
-	public $Totaal;
+    /**
+     * @var float
+     */
+    public $Totaal;
 
-	/**
-	 * @var int
-	 */
-	public $VerpId;
+    /**
+     * @var int
+     */
+    public $VerpId;
 
-	/**
-	 * @var string
-	 */
-	public $VerpOms;
+    /**
+     * @var string
+     */
+    public $VerpOms;
 
-	/**
-	 * Map the properties to a given type
-	 *
-	 * @var array
-	 */
-	protected $typeMap = array(
-		'float' => array(
-			'Aantal', 'EenheidExcl', 'Totaal'
-		),
-		'int' => array(
-			'Korting', 'VerpId'
-		)
-	);
+    /**
+     * Map the properties to a given type
+     *
+     * @var array
+     */
+    protected $typeMap = [
+        'float' => [
+            'Aantal', 'EenheidExcl', 'Totaal',
+        ],
+        'int' => [
+            'Korting', 'VerpId',
+        ],
+    ];
 }
