@@ -2,6 +2,8 @@
 
 namespace TijsVerkoyen\DBFact\Types;
 
+use DateTime;
+use SimpleXMLElement;
 use TijsVerkoyen\DBFact\DBFact;
 
 /**
@@ -11,6 +13,8 @@ use TijsVerkoyen\DBFact\DBFact;
  */
 class BaseObject
 {
+    const TYPE_LOCATION = 'TijsVerkoyen\\DBFact\\Types\\';
+
     /**
      * Map the properties to a given type
      *
@@ -19,69 +23,145 @@ class BaseObject
     protected $typeMap = [];
 
     /**
+     * @param string $type
+     *
+     * @return bool
+     */
+    protected function isTypeMapped($type)
+    {
+        return isset($this->typeMap[$type]);
+    }
+
+    /**
+     * @param $type
+     *
+     * @return array
+     */
+    protected function getMappedVariablesForType($type)
+    {
+        if (!$this->isTypeMapped($type)) {
+            return [];
+        }
+
+        return $this->typeMap[$type];
+    }
+
+    /**
+     * @param $name
+     * @param $type
+     *
+     * @return bool
+     */
+    protected function isVariableTypeOf($name, $type)
+    {
+        return in_array($name, $this->getMappedVariablesForType($type));
+    }
+
+    /**
+     * @param $string
+     *
+     * @return DateTime
+     */
+    protected function createDateTimeFromString($string)
+    {
+        $day = (int) substr($string, 6, 2);
+        $month = (int) substr($string, 4, 2);
+        $year = (int) substr($string, 0, 4);
+
+        if (substr_count($string, '/') > 0) {
+            $day = (int) substr($string, 0, 2);
+            $month = (int) substr($string, 3, 2);
+            $year = (int) substr($string, 6, 4);
+        }
+
+        if ($month == 0 || $day == 0 || $year == 0) {
+            return;
+        }
+
+        $date = new DateTime();
+        $date->setDate($year, $month, $day);
+        $date->setTime(0, 0, 0);
+
+        return $date;
+    }
+
+    protected static function getPossibleMappedTypes()
+    {
+        return [
+            'array',
+            'bool',
+            'float',
+            'int',
+            'DateTime',
+            'Custom',
+            'Collection'
+        ];
+    }
+
+    protected function getMappedTypeForName($name)
+    {
+        foreach (self::getPossibleMappedTypes() as $type) {
+            if ($this->isVariableTypeOf($name, $type)) {
+                return $type;
+            }
+        }
+    }
+
+    /**
      * Initialize the object
      *
      * @param SimpleXMLElement $xml
      */
-    public function initialize(\SimpleXMLElement $xml)
+    public function initialize(SimpleXMLElement $xml)
     {
         foreach ($xml as $property) {
             $name = (string) $property->getName();
             $value = $property;
 
-            if (isset($this->typeMap['array']) && in_array($name, $this->typeMap['array'])) {
-                $items = [];
-                foreach ($property as $item) {
-                    $itemName = (string) $item->getName();
-                    $items[] = DBFact::convertToObject(
-                        $item,
-                        'TijsVerkoyen\\DBFact\\Types\\' . $itemName
-                    );
-                }
-                $value = $items;
-            } elseif (isset($this->typeMap['bool']) && in_array($name, $this->typeMap['bool'])) {
-                $value = (strtolower($value) == 'true');
-            } elseif (isset($this->typeMap['float']) && in_array($name, $this->typeMap['float'])) {
-                $value = (float) str_replace(',', '.', $value);
-            } elseif (isset($this->typeMap['int']) && in_array($name, $this->typeMap['int'])) {
-                $value = (int) $value;
-            } elseif (isset($this->typeMap['DateTime']) && in_array($name, $this->typeMap['DateTime'])) {
-                if (substr_count($value, '/') > 0) {
-                    $day = (int) substr($value, 0, 2);
-                    $month = (int) substr($value, 3, 2);
-                    $year = (int) substr($value, 6, 4);
-                } else {
-                    $day = (int) substr($value, 6, 2);
-                    $month = (int) substr($value, 4, 2);
-                    $year = (int) substr($value, 0, 4);
-                }
-                if ($month == 0 || $day == 0 || $year == 0) {
-                    $value = null;
-                } else {
-                    $value = new \DateTime();
-                    $value->setDate($year, $month, $day);
-                    $value->setTime(0, 0, 0);
-                }
-            } elseif (isset($this->typeMap['Custom']) && in_array($name, $this->typeMap['Custom'])) {
-                $value = DBFact::convertToObject(
-                    $property,
-                    'TijsVerkoyen\\DBFact\\Types\\' . $name
-                );
-            } elseif (isset($this->typeMap['Collection']) && in_array($name, $this->typeMap['Collection'])) {
-                $items = [];
-                foreach ($xml->{$name} as $item) {
-                    $itemName = (string) $item->getName();
-                    $items[] = DBFact::convertToObject(
-                        $item,
-                        'TijsVerkoyen\\DBFact\\Types\\' . $itemName
-                    );
-                }
-                $value = $items;
-            } else {
-                $value = (string) $value;
-                if ($value == '') {
-                    $value = null;
-                }
+            // Transform the value to the correct type.
+            switch ($this->getMappedTypeForName($name)) {
+                case 'array':
+                    $items = [];
+                    foreach ($property as $item) {
+                        $itemName = (string) $item->getName();
+                        $items[] = DBFact::convertToObject(
+                            $item,
+                            self::TYPE_LOCATION . $itemName
+                        );
+                    }
+                    $value = $items;
+                    break;
+                case 'bool':
+                    $value = (strtolower($value) == 'true');
+                    break;
+                case 'float':
+                    $value = (float) str_replace(',', '.', $value);
+                    break;
+                case 'int':
+                    $value = (int) $value;
+                    break;
+                case 'DateTime':
+                    $value = $this->createDateTimeFromString($value);
+                    break;
+                case 'Custom':
+                    $value = DBFact::convertToObject($property, self::TYPE_LOCATION . $name);
+                    break;
+                case 'Collection':
+                    $items = [];
+                    foreach ($xml->{$name} as $item) {
+                        $itemName = (string) $item->getName();
+                        $items[] = DBFact::convertToObject(
+                            $item,
+                            self::TYPE_LOCATION . $itemName
+                        );
+                    }
+                    $value = $items;
+                    break;
+                default:
+                    $value = (string) $value;
+                    if ($value == '') {
+                        $value = null;
+                    }
             }
 
             $this->{$name} = $value;
